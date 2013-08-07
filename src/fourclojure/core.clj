@@ -72,18 +72,23 @@
         :lt
         :gt))))
 
-(defn pascal-cell [index prev-row]
-  (let [cell-value (+
-                     (nth prev-row (- index 1) 0)
-                     (nth prev-row (- index 0) 0))]
-    cell-value))
-
 (defn pascal [row]
-  (if (= row 1)
+  (fn pascal-cell [index prev-row]
+    (let [cell-value (+
+                       (nth prev-row (- index 1) 0)
+                       (nth prev-row (- index 0) 0))]
+      cell-value))
+  (if (<= row 1)
     [1]
     (let [prev-row (pascal (dec row))
-          indicies (range (dec row))
+          indicies (range row)
           new-row (map (fn [index]
                          (pascal-cell index prev-row))
                        indicies)]
-      (conj new-row 1))))
+      new-row)))
+
+(defn my-interpose [spacer s]
+  ;(mapcat #(list %1 spacer) s))
+  (flatten (reduce (fn [a b]
+            (list a spacer b))
+          s)))

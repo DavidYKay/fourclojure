@@ -89,3 +89,9 @@
                                    [1 4 6 4 1]]
       (pascal 11) => [1 10 45 120 210 252 210 120 45 10 1]
       )
+
+(fact "I can interpose a seq"
+      (my-interpose 0 [1 2 3]) => [1 0 2 0 3]
+      (apply str (my-interpose ", " ["one" "two" "three"])) => "one, two, three"
+      (my-interpose :z [:a :b :c :d]) => [:a :z :b :z :c :z :d]
+      )
