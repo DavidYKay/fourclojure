@@ -7,20 +7,20 @@
 
 (defn compress [s]
   ;(mapcat (fn [a b]
-            ;(if (= a b) a 
-              ;[a b])) 
+            ;(if (= a b) a
+              ;[a b]))
           ;s))
   ;(mapcat (fn [a b] (if (= a b) a [a b])) s))
-  (reduce (fn [a b] 
-            (if (= a b) 
-              a 
+  (reduce (fn [a b]
+            (if (= a b)
+              a
               (flatten [a b])))
           s))
 
-(defn maxi [& args] 
-  (reduce #(if (> %1 %2) 
+(defn maxi [& args]
+  (reduce #(if (> %1 %2)
              %1
-             %2) 
+             %2)
           args))
 
 (defn weave [a b]
@@ -28,8 +28,8 @@
      (if (or (= (count a) 0)
              (= (count b) 0))
        accum
-       (let [new-accum (conj 
-                         (conj accum (first a)) 
+       (let [new-accum (conj
+                         (conj accum (first a))
                          (first b))]
          (recur (rest a) (rest b) new-accum))))
      a
@@ -43,7 +43,7 @@
                    (inc x))
                  begin)))
 
-(defn has-nil [k m]
+(defn has-nil? [k m]
   (and (contains? m k)
        (nil? (k m))))
 
