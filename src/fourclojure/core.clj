@@ -129,3 +129,13 @@
           1)
       false
       true)))
+
+(defn my-iterate [f n]
+  (cons n
+    (lazy-seq (my-iterate f (f n)))))
+
+(defn fib [a b]
+  (cons a
+        (lazy-seq
+          (fib b (+ b a)))))
+

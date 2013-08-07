@@ -154,3 +154,10 @@
                            #{(do) set contains? nil?}
                            #{, , , #_, , empty?}}) => false
       )
+
+(fact "I can re-implement iterate. Prob62"
+      (take 100
+            (my-iterate inc 0)) => (take 100 (range))
+      (take 5 (my-iterate #(* 2 %) 1)) => [1 2 4 8 16]
+      (take 9 (my-iterate #(inc (mod % 3)) 1)) => (take 9 (cycle [1 2 3]))
+      )
