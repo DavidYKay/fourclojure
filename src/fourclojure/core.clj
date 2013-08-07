@@ -137,3 +137,12 @@
 (defn my-zipmap [ks vs]
   (reduce merge
     (map #(assoc {} %1 %2) ks vs)))
+
+(defn drop-every-nth [s n]
+  (remove nil?
+          (map-indexed (fn [idx itm]
+                         (let [nice-index (inc idx)]
+                           (if (= 0 (mod nice-index n))
+                             nil
+                             itm)))
+                       s)))

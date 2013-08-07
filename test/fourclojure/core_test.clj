@@ -167,3 +167,9 @@
       (my-zipmap [1 2 3 4] ["one" "two" "three"]) => {1 "one", 2 "two", 3 "three"}
       (my-zipmap [:foo :bar] ["foo" "bar" "baz"]) => {:foo "foo", :bar "bar"}
       )
+
+(fact "I can drop every Nth item. Prob41."
+      (drop-every-nth [1 2 3 4 5 6 7 8] 3) => [1 2 4 5 7 8]
+      (drop-every-nth [:a :b :c :d :e :f] 2) => [:a :c :e]
+      (drop-every-nth [1 2 3 4 5 6] 4) => [1 2 3 5 6]
+      )
