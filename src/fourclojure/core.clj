@@ -134,8 +134,6 @@
   (cons n
     (lazy-seq (my-iterate f (f n)))))
 
-(defn fib [a b]
-  (cons a
-        (lazy-seq
-          (fib b (+ b a)))))
-
+(defn my-zipmap [ks vs]
+  (reduce merge
+    (map #(assoc {} %1 %2) ks vs)))

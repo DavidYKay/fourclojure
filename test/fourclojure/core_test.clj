@@ -161,3 +161,9 @@
       (take 5 (my-iterate #(* 2 %) 1)) => [1 2 4 8 16]
       (take 9 (my-iterate #(inc (mod % 3)) 1)) => (take 9 (cycle [1 2 3]))
       )
+
+(fact "I can re-implement zipmap. Prob61"
+      (my-zipmap [:a :b :c] [1 2 3]) => {:a 1, :b 2, :c 3}
+      (my-zipmap [1 2 3 4] ["one" "two" "three"]) => {1 "one", 2 "two", 3 "three"}
+      (my-zipmap [:foo :bar] ["foo" "bar" "baz"]) => {:foo "foo", :bar "bar"}
+      )
