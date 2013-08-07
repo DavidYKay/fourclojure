@@ -95,3 +95,10 @@
       (my-intersection #{0 1 2} #{3 4 5}) => #{}
       (my-intersection #{:a :b :c :d} #{:c :e :a :f :d}) => #{:a :c :d}
       )
+
+
+(fact "I can split a sequence. Prob49"
+      (my-split 3 [1 2 3 4 5 6])       => [[1 2 3] [4 5 6]]
+      (my-split 1 [:a :b :c :d])       => [[:a] [:b :c :d]]
+      (my-split 2 [[1 2] [3 4] [5 6]]) => [[[1 2] [3 4]] [[5 6]]]
+      )

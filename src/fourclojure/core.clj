@@ -98,3 +98,8 @@
 
 (defn my-intersection [a b]
   (set (filter #(contains? b %1) a)))
+
+(defn my-split [n s]
+  (list
+    (take n s)
+    (drop n s)))
