@@ -57,3 +57,23 @@
           new-args (conj (rest (rest (rest args)))
                          result)]
       (recur new-args))))
+
+(defn default-map [default ks]
+  "Problem 156"
+  (zipmap ks (repeat default)))
+
+(defn my-compare [f a b]
+  (let [f-a (f a b)
+        f-b (f b a)]
+    (if (= false f-a f-b)
+      :eq
+      (if (and (= true f-a)
+               (= false f-b))
+        :lt
+        :gt))))
+
+
+(defn pascal [row]
+  (if (= row 1)
+    [1]
+    (conj (pascal (dec row)) 1)))

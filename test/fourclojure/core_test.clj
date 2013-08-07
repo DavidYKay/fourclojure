@@ -4,11 +4,11 @@
 
 ; (fact "I can compress a sequence"
 ;       (+ 1 1) => 2
-; 
+;
 ;       (apply str (compress "Leeeeeerrroyyy")) => "Leroy"
 ;       (compress [1 1 2 3 3 2 2 3]) => '(1 2 3 2 3)
 ;       (compress [[1 2] [1 2] [3 4] [1 2]]) => '([1 2] [3 4] [1 2])
-; 
+;
 ;       )
 
 (fact "I can find the maximum in a sequence"
@@ -36,8 +36,35 @@
       )
 
 (fact "I can make an infix calculator"
-       (infix-calc 2 + 5)                            => 7 
-       (infix-calc 38 + 48 - 2 / 2)                  => 42
-       (infix-calc 10 / 2 - 1 * 2)                  => 8 
-       (infix-calc 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9)  => 72
+      (infix-calc 2 + 5)                            => 7
+      (infix-calc 38 + 48 - 2 / 2)                  => 42
+      (infix-calc 10 / 2 - 1 * 2)                  => 8
+      (infix-calc 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9)  => 72
+      )
+
+(fact "I can make default map keys. Prob156"
+      (default-map 0 [:a :b :c])        => { :a 0 :b 0 :c 0}
+      (default-map "x" [1 2 3])         => { 1 "x" 2 "x" 3 "x"}
+      (default-map [:a :b] [:foo :bar]) => { :foo [:a :b] :bar [:a :b] }
+      )
+
+(fact "I can write my own comparison. Prob166"
+      (my-compare < 5 1) => :gt
+      (my-compare (fn [x y]
+                    (< (count x) (count y)))
+                  "pear" "plum") => :eq
+      (my-compare (fn [x y]
+                    (< (mod x 5) (mod y 5)))
+                  21 3)         => :lt
+      (my-compare > 0 2) => :gt
+      )
+
+(fact "I can produce pascal's triangle. Prob97"
+      (pascal 1) => [1]
+      (map pascal (range 1 6)) => [[1]
+                                   [1 1]
+                                   [1 2 1]
+                                   [1 3 3 1]
+                                   [1 4 6 4 1]]
+      (pascal 11) => [1 10 45 120 210 252 210 120 45 10 1]
       )
