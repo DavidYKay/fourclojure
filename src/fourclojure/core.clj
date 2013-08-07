@@ -163,3 +163,13 @@
 (defn product-digits [a b]
   (map #(read-string (str %1))
        (seq (str (* a b)))))
+
+(defn group-sequence [f s]
+  (reduce
+    #(merge-with concat
+                 %2 %1)
+              (map (fn [pair]
+                     (let [k (first pair)
+                           v (last pair)]
+                       {v [k]}))
+                   (zipmap s (map f s)))))
