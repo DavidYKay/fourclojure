@@ -91,3 +91,10 @@
   (if (= b 0)
     a
     (recur b (mod a b))))
+
+(defn my-closure [x]
+  (fn [n]
+    (int (Math/pow n x))))
+
+(defn my-intersection [a b]
+  (set (filter #(contains? b %1) a)))

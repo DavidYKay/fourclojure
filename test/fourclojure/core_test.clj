@@ -81,3 +81,17 @@
       (my-gcd 5 7) => 1
       (my-gcd 1023 858) => 33
       )
+
+(fact "I can find the GCD of two numbers"
+      ((my-closure 2) 16) => 256
+      ((my-closure 8) 2)  => 256
+
+      (map (my-closure 3) [1 2 3 4])        => [1 8 27 64]
+      (map #((my-closure %) 2) [0 1 2 3 4]) => [1 2 4 8 16]
+)
+
+(fact "I can perform intersection of two sets"
+      (my-intersection #{0 1 2 3} #{2 3 4 5}) => #{2 3}
+      (my-intersection #{0 1 2} #{3 4 5}) => #{}
+      (my-intersection #{:a :b :c :d} #{:c :e :a :f :d}) => #{:a :c :d}
+      )
