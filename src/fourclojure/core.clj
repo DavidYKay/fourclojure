@@ -72,8 +72,18 @@
         :lt
         :gt))))
 
+(defn pascal-cell [index prev-row]
+  (let [cell-value (+
+                     (nth prev-row (- index 1) 0)
+                     (nth prev-row (- index 0) 0))]
+    cell-value))
 
 (defn pascal [row]
   (if (= row 1)
     [1]
-    (conj (pascal (dec row)) 1)))
+    (let [prev-row (pascal (dec row))
+          indicies (range (dec row))
+          new-row (map (fn [index]
+                         (pascal-cell index prev-row))
+                       indicies)]
+      (conj new-row 1))))

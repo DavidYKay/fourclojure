@@ -59,6 +59,27 @@
       (my-compare > 0 2) => :gt
       )
 
+(fact "I am a utility for generating cells"
+      (pascal-cell 0 [1]) => 1
+      (pascal-cell 1 [1]) => 1
+
+      (pascal-cell 0 [1 1]) => 1
+      (pascal-cell 1 [1 1]) => 2
+      (pascal-cell 2 [1 1]) => 1
+
+      (pascal-cell 0 [1 2 1]) => 1
+      (pascal-cell 1 [1 2 1]) => 3
+      (pascal-cell 2 [1 2 1]) => 3
+      (pascal-cell 3 [1 2 1]) => 1
+
+      (pascal-cell 0 [1 3 3 1]) => 1
+      (pascal-cell 1 [1 3 3 1]) => 4
+      (pascal-cell 2 [1 3 3 1]) => 6
+      (pascal-cell 3 [1 3 3 1]) => 4
+      (pascal-cell 4 [1 3 3 1]) => 1
+
+      )
+
 (fact "I can produce pascal's triangle. Prob97"
       (pascal 1) => [1]
       (map pascal (range 1 6)) => [[1]
