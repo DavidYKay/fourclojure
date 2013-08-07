@@ -1,13 +1,9 @@
 # fourclojure
 
-A Clojure library designed to ... well, that part is up to you.
-
-## Usage
-
-FIXME
+My attempts at the problems at www.4clojure.com
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 David Kay
 
 Distributed under the Eclipse Public License, the same as Clojure.
