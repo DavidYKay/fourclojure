@@ -154,3 +154,8 @@
   (reduce +
           (map #(* %1 %2)
                a b)))
+
+(defn cartesian-product [a b]
+  (set (for [x a
+        y b]
+    [x y])))

@@ -196,3 +196,24 @@
       (dot-product [1 2 3] [4 5 6]) => 32
       (dot-product [2 5 6] [100 10 1]) => 256
       )
+
+(fact "I know advanced destructuring. Prob51."
+      (let [[a b & c :as d] [1 2 3 4 5]]
+        [a b c d]) => [1 2 [3 4 5] [1 2 3 4 5]]
+      )
+
+
+
+(fact "Cartesian Product. Prob90"
+
+      (cartesian-product #{"ace" "king" "queen"} #{"♠" "♥" "♦" "♣"}) =>
+      #{["ace"   "♠"] ["ace"   "♥"] ["ace"   "♦"] ["ace"   "♣"]
+        ["king"  "♠"] ["king"  "♥"] ["king"  "♦"] ["king"  "♣"]
+        ["queen" "♠"] ["queen" "♥"] ["queen" "♦"] ["queen" "♣"]}
+
+      (cartesian-product #{1 2 3} #{4 5}) =>
+      #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]}
+
+      (count (cartesian-product (into #{} (range 10))
+                 (into #{} (range 30)))) => 300
+      )
