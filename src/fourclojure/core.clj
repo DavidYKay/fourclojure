@@ -88,7 +88,12 @@
       new-row)))
 
 (defn my-interpose [spacer s]
-  ;(mapcat #(list %1 spacer) s))
   (flatten (reduce (fn [a b]
-            (list a spacer b))
-          s)))
+                     (list a spacer b))
+                   s)))
+
+(defn my-gcd [a b]
+  (if
+    (= b 0)
+    a
+    (recur b (mod a b))))

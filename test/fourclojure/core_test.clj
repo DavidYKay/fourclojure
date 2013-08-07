@@ -95,3 +95,10 @@
       (apply str (my-interpose ", " ["one" "two" "three"])) => "one, two, three"
       (my-interpose :z [:a :b :c :d]) => [:a :z :b :z :c :z :d]
       )
+
+(fact "I can find the GCD of two numbers"
+      (my-gcd 2 4) => 2
+      (my-gcd 10 5) => 5
+      (my-gcd 5 7) => 1
+      (my-gcd 1023 858) => 33
+      )
