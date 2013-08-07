@@ -182,3 +182,10 @@
       (half-truth true true true) => false
       (half-truth true true true false) => true
       )
+
+(fact "Looking glass. Prob126"
+  (let [x Class]
+    (and (= (class x)
+            x)
+         x)) => true
+  )
