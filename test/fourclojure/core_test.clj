@@ -173,3 +173,12 @@
       (drop-every-nth [:a :b :c :d :e :f] 2) => [:a :c :e]
       (drop-every-nth [1 2 3 4 5 6] 4) => [1 2 3 5 6]
       )
+
+(fact "I can find half-truths. Prob83"
+      (half-truth false false) => false
+      (half-truth true false) => true
+      (half-truth true) => false
+      (half-truth false true false) => true
+      (half-truth true true true) => false
+      (half-truth true true true false) => true
+      )

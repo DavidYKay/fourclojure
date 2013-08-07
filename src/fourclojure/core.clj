@@ -146,3 +146,6 @@
                              nil
                              itm)))
                        s)))
+
+(defn half-truth [& args]
+  (= 2 (count (group-by identity args))))
