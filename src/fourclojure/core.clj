@@ -6,16 +6,13 @@
   (println x "Hello, World!"))
 
 (defn compress [s]
-  ;(mapcat (fn [a b]
-            ;(if (= a b) a
-              ;[a b]))
-          ;s))
-  ;(mapcat (fn [a b] (if (= a b) a [a b])) s))
-  (reduce (fn [a b]
-            (if (= a b)
-              a
-              (flatten [a b])))
-          s))
+  (map first
+       (partition-by identity s)))
+  ;(reduce (fn [a b]
+                     ;(if (= a b)
+                       ;a
+                       ;(cons a b)))
+                   ;s))
 
 (defn maxi [& args]
   (reduce #(if (> %1 %2)
@@ -35,7 +32,6 @@
      a
      b
      []))
-
 
 (defn my-range [begin end]
   (take (- end begin)
@@ -71,19 +67,18 @@
                (= false f-b))
         :lt
         :gt))))
-
 (defn pascal [row]
-  (fn pascal-cell [index prev-row]
-    (let [cell-value (+
-                       (nth prev-row (- index 1) 0)
-                       (nth prev-row (- index 0) 0))]
-      cell-value))
+
   (if (<= row 1)
     [1]
     (let [prev-row (pascal (dec row))
           indicies (range row)
           new-row (map (fn [index]
-                         (pascal-cell index prev-row))
+                         ((fn pascal-cell [index prev-row]
+    (let [cell-value (+
+                       (nth prev-row (- index 1) 0)
+                       (nth prev-row (- index 0) 0))]
+      cell-value)) index prev-row))
                        indicies)]
       new-row)))
 
@@ -93,7 +88,6 @@
                    s)))
 
 (defn my-gcd [a b]
-  (if
-    (= b 0)
+  (if (= b 0)
     a
     (recur b (mod a b))))

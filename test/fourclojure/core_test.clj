@@ -2,14 +2,14 @@
   (:use midje.sweet
         fourclojure.core))
 
-; (fact "I can compress a sequence"
-;       (+ 1 1) => 2
-;
-;       (apply str (compress "Leeeeeerrroyyy")) => "Leroy"
-;       (compress [1 1 2 3 3 2 2 3]) => '(1 2 3 2 3)
-;       (compress [[1 2] [1 2] [3 4] [1 2]]) => '([1 2] [3 4] [1 2])
-;
-;       )
+(fact "I can compress a sequence"
+      (+ 1 1) => 2
+
+      (apply str (compress "Leeeeeerrroyyy")) => "Leroy"
+      (compress [1 1 2 3 3 2 2 3]) => '(1 2 3 2 3)
+      (compress [[1 2] [1 2] [3 4] [1 2]]) => '([1 2] [3 4] [1 2])
+
+      )
 
 (fact "I can find the maximum in a sequence"
       (maxi 1 8 3 4) => 8
@@ -57,27 +57,6 @@
                     (< (mod x 5) (mod y 5)))
                   21 3)         => :lt
       (my-compare > 0 2) => :gt
-      )
-
-(fact "I am a utility for generating cells"
-      (pascal-cell 0 [1]) => 1
-      (pascal-cell 1 [1]) => 1
-
-      (pascal-cell 0 [1 1]) => 1
-      (pascal-cell 1 [1 1]) => 2
-      (pascal-cell 2 [1 1]) => 1
-
-      (pascal-cell 0 [1 2 1]) => 1
-      (pascal-cell 1 [1 2 1]) => 3
-      (pascal-cell 2 [1 2 1]) => 3
-      (pascal-cell 3 [1 2 1]) => 1
-
-      (pascal-cell 0 [1 3 3 1]) => 1
-      (pascal-cell 1 [1 3 3 1]) => 4
-      (pascal-cell 2 [1 3 3 1]) => 6
-      (pascal-cell 3 [1 3 3 1]) => 4
-      (pascal-cell 4 [1 3 3 1]) => 1
-
       )
 
 (fact "I can produce pascal's triangle. Prob97"
