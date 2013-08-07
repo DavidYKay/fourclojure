@@ -102,3 +102,14 @@
       (my-split 1 [:a :b :c :d])       => [[:a] [:b :c :d]]
       (my-split 2 [[1 2] [3 4] [5 6]]) => [[[1 2] [3 4]] [[5 6]]]
       )
+
+
+(fact "I can read a binary number. Prob122"
+      (read-binary "0")                     => 0
+      (read-binary "111")                   => 7
+      (read-binary "1000")                  => 8
+      (read-binary "1001")                  => 9
+      (read-binary "11111111")              => 255
+      (read-binary "10101010101")           => 1365
+      (read-binary "1111111111111111")      => 65535
+      )

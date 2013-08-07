@@ -103,3 +103,24 @@
   (list
     (take n s)
     (drop n s)))
+
+(defn read-binary [x]
+  (int (reduce +
+               (map-indexed (fn [idx itm]
+                              (let [n (read-string (str itm))]
+                                (* n (Math/pow 2 idx))))
+                            (reverse x)))))
+
+  ;(loop [bin-str x
+         ;accum 0]
+    ;(if (or (nil? bin-str)
+            ;(= bin-str ""))
+      ;accum
+      ;(let [pow (count bin-str)
+            ;current (first bin-str)
+            ;n (if (= current "1")
+                ;(Math/pow 2 pow)
+                ;0)
+            ;new-str (rest bin-str)
+            ;new-accum (+ accum n)]
+        ;(recur new-str new-accum)))))
