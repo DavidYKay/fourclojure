@@ -111,16 +111,21 @@
                                 (* n (Math/pow 2 idx))))
                             (reverse x)))))
 
-  ;(loop [bin-str x
-         ;accum 0]
-    ;(if (or (nil? bin-str)
-            ;(= bin-str ""))
-      ;accum
-      ;(let [pow (count bin-str)
-            ;current (first bin-str)
-            ;n (if (= current "1")
-                ;(Math/pow 2 pow)
-                ;0)
-            ;new-str (rest bin-str)
-            ;new-accum (+ accum n)]
-        ;(recur new-str new-accum)))))
+;(defn flatten-sets
+  ;"Like flatten, but pulls elements out of sets instead of sequences."
+  ;[v]
+  ;(filter (complement set?)
+          ;(rest (tree-seq set? seq (set v)))))
+
+
+(defn pairwise-disjoint [sets]
+  (let [flattened (filter (complement set?)
+                          (rest (tree-seq set? seq (set sets))))]
+    (if (>
+          (reduce max
+                  (map (fn [m]
+                         (count (last m)))
+                       (seq (group-by identity flattened))))
+          1)
+      false
+      true)))
