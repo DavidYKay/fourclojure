@@ -149,3 +149,8 @@
 
 (defn half-truth [& args]
   (= 2 (count (group-by identity args))))
+
+(defn dot-product [a b]
+  (reduce +
+          (map #(* %1 %2)
+               a b)))
