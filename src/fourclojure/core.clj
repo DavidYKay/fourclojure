@@ -157,5 +157,9 @@
 
 (defn cartesian-product [a b]
   (set (for [x a
-        y b]
-    [x y])))
+             y b]
+         [x y])))
+
+(defn product-digits [a b]
+  (map #(read-string (str %1))
+       (seq (str (* a b)))))

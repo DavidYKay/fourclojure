@@ -205,7 +205,6 @@
 
 
 (fact "Cartesian Product. Prob90"
-
       (cartesian-product #{"ace" "king" "queen"} #{"♠" "♥" "♦" "♣"}) =>
       #{["ace"   "♠"] ["ace"   "♥"] ["ace"   "♦"] ["ace"   "♣"]
         ["king"  "♠"] ["king"  "♥"] ["king"  "♦"] ["king"  "♣"]
@@ -215,5 +214,11 @@
       #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]}
 
       (count (cartesian-product (into #{} (range 10))
-                 (into #{} (range 30)))) => 300
+                                (into #{} (range 30)))) => 300
+      )
+
+(fact "Product Digits. Prob99"
+      (product-digits 1 1) => [1]
+      (product-digits 99 9) => [8 9 1]
+      (product-digits 999 99) => [9 8 9 0 1]
       )
