@@ -285,3 +285,11 @@
       ;(lcm 3/4 1/6) => 3/2
       ;(lcm 7 5/7 2 3/5) => 210
       ;)
+;
+
+(fact "Symmetric difference. Prob88"
+      (set-difference #{1 2 3 4 5 6} #{1 3 5 7}) => #{2 4 6 7}
+      (set-difference #{:a :b :c} #{}) => #{:a :b :c}
+      (set-difference #{} #{4 5 6}) => #{4 5 6}
+      (set-difference #{[1 2] [2 3]} #{[2 3] [3 4]}) => #{[1 2] [3 4]}
+      )

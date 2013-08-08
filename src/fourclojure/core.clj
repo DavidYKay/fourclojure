@@ -193,23 +193,23 @@
            (is-binary-tree? (last t)))
       false)))
 
-(defn mirror-tree [t]
-  (if (nil? t)
-    nil
-    [(first t)
-     (mirror-tree (last t))
-     (mirror-tree (second t))]))
-
 (defn is-symmetric-tree? [t]
-  (let [value (first t)
-        left (second t)
-        right (last t)]
-    (if (nil? t)
-      true
-      (if (or (= left right)
-              (= left (mirror-tree right)))
-              true
-              false))))
+  (letfn [(mirror-tree [t]
+          (if (nil? t)
+            nil
+            [(first t)
+             (mirror-tree (last t))
+             (mirror-tree (second t))]))]
+
+    (let [value (first t)
+          left (second t)
+          right (last t)]
+      (if (nil? t)
+        true
+        (if (or (= left right)
+                (= left (mirror-tree right)))
+          true
+          false)))))
 
 (defn rec-playing-card [card-string]
   (let [suits {\D :diamond
@@ -242,4 +242,9 @@
 (defn lcm [a b]
   (/ (* a b)
      (my-gcd a b)))
+
+(defn set-difference [a b]
+  (clojure.set/union
+    (clojure.set/difference a b)
+    (clojure.set/difference b a)))
 
