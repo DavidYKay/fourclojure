@@ -235,3 +235,11 @@
                                                             2 [[1 2] [2 3]],
                                                             3 [[1 2 3]]}
       )
+
+
+(fact "Can find the sum of squares. Prob120"
+  (sum-squares (range 10))   => 8
+  (sum-squares (range 30))   => 19
+  (sum-squares (range 100))  => 50
+  (sum-squares (range 1000)) => 50
+)

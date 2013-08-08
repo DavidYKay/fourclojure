@@ -173,3 +173,15 @@
                            v (last pair)]
                        {v [k]}))
                    (zipmap s (map f s)))))
+
+
+(defn sum-squares [nums]
+  (count
+    (filter true?
+            (map (fn [n]
+                   (let [digits (map #(read-string (str %1)) (seq (str n)))
+                         squares (map #(* %1 %1) digits)
+                         sum-square (reduce + squares)
+                         smaller-than-sum-square (< n sum-square)]
+                     smaller-than-sum-square))
+                 nums))))
