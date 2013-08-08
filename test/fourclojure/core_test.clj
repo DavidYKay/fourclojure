@@ -260,3 +260,9 @@
       (rec-playing-card "CA") => {:suit :club    :rank 12}
       (map (comp :rank rec-playing-card str) '[S2 S3 S4 S5 S6 S7 S8 S9 ST SJ SQ SK SA]) => (range 13)
       )
+
+(fact "I can re-implement Map. Prob118."
+      (my-map inc [2 3 4 5 6]) => [3 4 5 6 7]
+      (my-map (fn [_] nil) (range 10)) => (repeat 10 nil)
+      (->> (my-map inc (range)) (drop (dec 1000000)) (take 2)) => [1000000 1000001]
+      )

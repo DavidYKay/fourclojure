@@ -213,3 +213,10 @@
                \A 12}]
     {:suit (get suits (first (seq card-string)))
      :rank (get ranks (last (seq card-string)))}))
+
+(defn my-map [f s]
+  (if (or (nil? s)
+          (empty? s))
+    nil
+    (cons (f (first s))
+          (lazy-seq (my-map f (rest s))))))
