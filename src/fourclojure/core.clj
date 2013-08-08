@@ -220,3 +220,8 @@
     nil
     (cons (f (first s))
           (lazy-seq (my-map f (rest s))))))
+
+(defn lcm [a b]
+  (/ (* a b)
+     (my-gcd a b)))
+

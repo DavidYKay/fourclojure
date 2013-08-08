@@ -266,3 +266,11 @@
       (my-map (fn [_] nil) (range 10)) => (repeat 10 nil)
       (->> (my-map inc (range)) (drop (dec 1000000)) (take 2)) => [1000000 1000001]
       )
+
+(fact "I can find the LCM of two numbers. Prob100."
+      (lcm 2 3) => 6
+      (lcm 5 3 7) => 105
+      (lcm 1/3 2/5) => 2
+      (lcm 3/4 1/6) => 3/2
+      (lcm 7 5/7 2 3/5) => 210
+      )
