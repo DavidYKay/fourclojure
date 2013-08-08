@@ -193,6 +193,24 @@
            (is-binary-tree? (last t)))
       false)))
 
+(defn mirror-tree [t]
+  (if (nil? t)
+    nil
+    [(first t)
+     (mirror-tree (last t))
+     (mirror-tree (second t))]))
+
+(defn is-symmetric-tree? [t]
+  (let [value (first t)
+        left (second t)
+        right (last t)]
+    (if (nil? t)
+      true
+      (if (or (= left right)
+              (= left (mirror-tree right)))
+              true
+              false))))
+
 (defn rec-playing-card [card-string]
   (let [suits {\D :diamond
                \H :heart

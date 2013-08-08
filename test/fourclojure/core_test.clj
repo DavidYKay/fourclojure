@@ -254,6 +254,17 @@
       (is-binary-tree? '(:a nil ()))                            => false
       )
 
+(fact "Detect a symmetric binary tree. Prob95"
+      (is-symmetric-tree? '(:a (:b nil nil) (:b nil nil)))                                                             => true
+      (is-symmetric-tree? '(:a (:b nil nil) nil))                                                                      => false
+      (is-symmetric-tree? '(:a (:b nil nil) (:c nil nil)))                                                             => false
+      (is-symmetric-tree? [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]] [2 [3 nil [4 [5 nil nil] [6 nil nil]]] nil]]) => false
+      (is-symmetric-tree? [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]] [2 [3 nil [4 [6 nil nil] nil]] nil]])         => false
+
+      (is-symmetric-tree? [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+                             [2 [3 nil [4 [6 nil nil] [5 nil nil]]] nil]]) => true
+      )
+
 (fact "Recognize a playing card. Prob128."
       (rec-playing-card "DQ") => {:suit :diamond :rank 10}
       (rec-playing-card "H5") => {:suit :heart   :rank 3}
@@ -267,10 +278,10 @@
       (->> (my-map inc (range)) (drop (dec 1000000)) (take 2)) => [1000000 1000001]
       )
 
-(fact "I can find the LCM of two numbers. Prob100."
-      (lcm 2 3) => 6
-      (lcm 5 3 7) => 105
-      (lcm 1/3 2/5) => 2
-      (lcm 3/4 1/6) => 3/2
-      (lcm 7 5/7 2 3/5) => 210
-      )
+;(fact "I can find the LCM of two numbers. Prob100."
+      ;(lcm 2 3) => 6
+      ;(lcm 5 3 7) => 105
+      ;(lcm 1/3 2/5) => 2
+      ;(lcm 3/4 1/6) => 3/2
+      ;(lcm 7 5/7 2 3/5) => 210
+      ;)
