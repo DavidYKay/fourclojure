@@ -166,14 +166,12 @@
 
 (defn group-sequence [f s]
   (reduce
-    #(merge-with concat
-                 %2 %1)
+    #(merge-with concat %2 %1)
               (map (fn [pair]
                      (let [k (first pair)
                            v (last pair)]
                        {v [k]}))
                    (zipmap s (map f s)))))
-
 
 (defn sum-squares [nums]
   (count
@@ -185,3 +183,33 @@
                          smaller-than-sum-square (< n sum-square)]
                      smaller-than-sum-square))
                  nums))))
+
+(defn is-binary-tree? [t]
+  (if (nil? t)
+    true
+    (if (and (coll? t)
+             (= (count t) 3))
+      (and (is-binary-tree? (second t))
+           (is-binary-tree? (last t)))
+      false)))
+
+(defn rec-playing-card [card-string]
+  (let [suits {\D :diamond
+               \H :heart
+               \C :club
+               \S :spade}
+        ranks {\2 0
+               \3 1
+               \4 2
+               \5 3
+               \6 4
+               \7 5
+               \8 6
+               \9 7
+               \T 8
+               \J 9
+               \Q 10
+               \K 11
+               \A 12}]
+    {:suit (get suits (first (seq card-string)))
+     :rank (get ranks (last (seq card-string)))}))

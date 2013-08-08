@@ -243,3 +243,20 @@
   (sum-squares (range 100))  => 50
   (sum-squares (range 1000)) => 50
 )
+
+(fact "Detect a binary tree. Prob95"
+      (is-binary-tree? '(:a (:b nil nil) nil))                  => true
+      (is-binary-tree? '(:a (:b nil nil)))                      => false
+      (is-binary-tree? [1 nil [2 [3 nil nil] [4 nil nil]]])     => true
+      (is-binary-tree? [1 [2 nil nil] [3 nil nil] [4 nil nil]]) => false
+      (is-binary-tree? [1 [2 [3 [4 nil nil] nil] nil] nil])     => true
+      (is-binary-tree? [1 [2 [3 [4 false nil] nil] nil] nil])   => false
+      (is-binary-tree? '(:a nil ()))                            => false
+      )
+
+(fact "Recognize a playing card. Prob128."
+      (rec-playing-card "DQ") => {:suit :diamond :rank 10}
+      (rec-playing-card "H5") => {:suit :heart   :rank 3}
+      (rec-playing-card "CA") => {:suit :club    :rank 12}
+      (map (comp :rank rec-playing-card str) '[S2 S3 S4 S5 S6 S7 S8 S9 ST SJ SQ SK SA]) => (range 13)
+      )
