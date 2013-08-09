@@ -248,3 +248,6 @@
     (clojure.set/difference a b)
     (clojure.set/difference b a)))
 
+(defn pascal-trapezoid [v]
+
+  )
