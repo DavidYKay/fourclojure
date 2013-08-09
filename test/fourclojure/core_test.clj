@@ -298,5 +298,14 @@
       (second (pascal-trapezoid [2 3 2]))   => [2 5 5 2]
       (take 5 (pascal-trapezoid [1]))       => [[1] [1 1] [1 2 1] [1 3 3 1] [1 4 6 4 1]]
       (take 2 (pascal-trapezoid [3 1 2]))   => [[3 1 2] [3 4 3 2]]
-      ;(take 100 (pascal-trapezoid [2 4 2])) => (rest (take 101 (pascal-trapezoid [2 2])))
+      (take 100 (pascal-trapezoid [2 4 2])) => (rest (take 101 (pascal-trapezoid [2 2])))
       )
+
+(fact "I understand destructuring #2. Prob173."
+      (let [[a c] [+ (range 3)]]
+        (apply a c))                         => 3
+      (let [[[a c] b] [[+ 1] 2]]
+        (a c b))                             => 3
+      (let [[a c] [inc 2]]
+        (a c))                               => 3
+)

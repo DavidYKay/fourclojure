@@ -249,12 +249,11 @@
 
 (defn pascal-trapezoid [v]
   (iterate (fn [previous]
-             (reverse (conj (reverse (map-indexed (fn [index element]
-                                  ; (println "creating index: " index " for previous: " previous)
-                                  (+ (nth previous (- index 1) 0)
-                                     (nth previous (- index 0) 0)))
-                                previous))
-                   (last previous))))
+             (flatten (conj (list (last previous))
+                     (map-indexed (fn [index element]
+                                    (+' (nth previous (- index 1) 0)
+                                       (nth previous (- index 0) 0)))
+                                  previous))))
            v))
 
 
