@@ -309,3 +309,11 @@
       (let [[a c] [inc 2]]
         (a c))                               => 3
 )
+
+
+
+(fact "I can Index Sequences. Prob157."
+      (index-sequence [:a :b :c])           => [[:a 0] [:b 1] [:c 2]]
+      (index-sequence [0 1 3])              => '((0 0) (1 1) (3 2))
+      (index-sequence [[:foo] {:bar :baz}]) => [[[:foo] 0] [{:bar :baz} 1]]
+      )

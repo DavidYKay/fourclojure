@@ -256,4 +256,7 @@
                                   previous))))
            v))
 
-
+(defn index-sequence [s]
+  (map-indexed (fn [idx e]
+                 [e idx])
+                  s))
