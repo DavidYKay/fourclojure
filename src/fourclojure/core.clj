@@ -67,18 +67,17 @@
                (= false f-b))
         :lt
         :gt))))
-(defn pascal [row]
 
+(defn pascal [row]
   (if (<= row 1)
     [1]
     (let [prev-row (pascal (dec row))
           indicies (range row)
           new-row (map (fn [index]
                          ((fn pascal-cell [index prev-row]
-    (let [cell-value (+
-                       (nth prev-row (- index 1) 0)
-                       (nth prev-row (- index 0) 0))]
-      cell-value)) index prev-row))
+                            (let [cell-value (+ (nth prev-row (- index 1) 0)
+                                                (nth prev-row (- index 0) 0))]
+                              cell-value)) index prev-row))
                        indicies)]
       new-row)))
 
@@ -249,5 +248,13 @@
     (clojure.set/difference b a)))
 
 (defn pascal-trapezoid [v]
+  (iterate (fn [previous]
+             (reverse (conj (reverse (map-indexed (fn [index element]
+                                  ; (println "creating index: " index " for previous: " previous)
+                                  (+ (nth previous (- index 1) 0)
+                                     (nth previous (- index 0) 0)))
+                                previous))
+                   (last previous))))
+           v))
 
-  )
+
