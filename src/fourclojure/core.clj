@@ -238,9 +238,26 @@
     (cons (f (first s))
           (lazy-seq (my-map f (rest s))))))
 
-(defn lcm [a b]
+(defn lcm-pair [a b]
   (/ (* a b)
      (my-gcd a b)))
+
+(defn lcm [& args]
+  (defn iterate-numbers [numbers]
+    ;(first (for [x [(range 1000)]
+    (first (for [x [2 3 4]
+                 :let [y (map #(/ x) numbers)]]
+             y))
+    )
+
+  (defn recursive-lcm [numbers factors]
+    (if (every? #(= 1) numbers)
+      (reduce * factors)
+      (let [new-numbers [ 1 1 1]
+            new-factors [ 1 2 3]
+            ]
+            (recur new-numbers new-factors))))
+  (recursive-lcm args []))
 
 (defn set-difference [a b]
   (clojure.set/union
@@ -260,3 +277,7 @@
   (map-indexed (fn [idx e]
                  [e idx])
                   s))
+
+(defn tree-to-table [t]
+
+  )

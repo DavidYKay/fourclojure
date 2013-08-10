@@ -278,14 +278,13 @@
       (->> (my-map inc (range)) (drop (dec 1000000)) (take 2)) => [1000000 1000001]
       )
 
-;(fact "I can find the LCM of two numbers. Prob100."
-      ;(lcm 2 3) => 6
-      ;(lcm 5 3 7) => 105
-      ;(lcm 1/3 2/5) => 2
-      ;(lcm 3/4 1/6) => 3/2
-      ;(lcm 7 5/7 2 3/5) => 210
-      ;)
-;
+(fact "I can find the LCM of two numbers. Prob100."
+      (lcm 2 3) => 6
+      (lcm 5 3 7) => 105
+      (lcm 1/3 2/5) => 2
+      (lcm 3/4 1/6) => 3/2
+      (lcm 7 5/7 2 3/5) => 210
+      )
 
 (fact "Symmetric difference. Prob88"
       (set-difference #{1 2 3 4 5 6} #{1 3 5 7}) => #{2 4 6 7}
@@ -310,10 +309,24 @@
         (a c))                               => 3
 )
 
-
-
 (fact "I can Index Sequences. Prob157."
       (index-sequence [:a :b :c])           => [[:a 0] [:b 1] [:c 2]]
       (index-sequence [0 1 3])              => '((0 0) (1 1) (3 2))
       (index-sequence [[:foo] {:bar :baz}]) => [[[:foo] 0] [{:bar :baz} 1]]
       )
+
+;(fact "Trees into tables"
+      ;(tree-to-table '{a {p 1, q 2}
+                       ;b {m 3, n 4}}) =>
+      ;'{[a p] 1, [a q] 2
+        ;[b m] 3, [b n] 4}
+
+      ;(tree-to-table '{[1] {a b c d}
+                       ;[2] {q r s t u v w x}}) =>
+      ;'{[[1] a] b, [[1] c] d,
+        ;[[2] q] r, [[2] s] t,
+        ;[[2] u] v, [[2] w] x}
+
+      ;(tree-to-table '{m {1 [a b c] 3 nil}}) =>
+      ;'{[m 1] [a b c], [m 3] nil}
+      ;)
