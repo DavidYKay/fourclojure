@@ -247,11 +247,7 @@
 
 (defn next-accum [accum]
  (let [products (map product accum)
-       min-number (reduce min products)
-       ; min-index (.indexOf products min-number)
-       ]
-   (println "products was: " products)
-   (println "min for: " products " was: " min-number)
+       min-number (reduce min products)]
    (map (fn [x]
           (if (= (product x) min-number)
             [(inc (first x)) (last x)]
@@ -264,13 +260,10 @@
       (if (and (> (count products) 0)
                (= (count (set products)) 1))
         (first products)
-        (do
-          (println "recurring with accum: " accum)
-          (recur (next-accum accum))))))
+          (recur (next-accum accum)))))
   (let [prepped-accum (map (fn [x]
                              [1 x])
-                           args)
-        ]
+                           args)]
     (recursive-lcm prepped-accum)))
 
 (defn set-difference [a b]
