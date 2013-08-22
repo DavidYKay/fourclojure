@@ -289,3 +289,38 @@
 (defn tree-to-table [t]
 
   )
+
+(defn levenshtein [a b]
+  (if (or (nil? a)
+          (= "" a))
+    (count b)
+    (if (or (nil? b)
+            (= "" b))
+      (count a)
+      (if (= a b)
+        0
+        (let [last-char-cost (if (= (last (seq a))
+                                    (last (seq b)))
+                               0
+                               1)]
+          (reduce min [(inc (levenshtein (butlast a) b))
+                       (inc (levenshtein a (butlast b)))
+                       (+ last-char-cost (levenshtein (butlast a) (butlast b)))]))))))
+
+; int LevenshteinDistance(string s, string t) {
+;   int len_s = length(s);
+;   int len_t = length(t);
+;
+;   /* test for degenerate cases of empty strings */
+;   if (len_s == 0) return len_t;
+;   if (len_t == 0) return len_s;
+;
+;   /* test if last characters of the strings match */
+;   if (s[len_s-1] == t[len_t-1]) cost = 0;
+;   else                          cost = 1;
+;
+;   /* return minimum of delete char from s, delete char from t, and delete char from both */
+;   return minimum(LevenshteinDistance(s[0..len_s-1], t) + 1,
+;                  LevenshteinDistance(s, t[0..len_t-1]) + 1,
+;                  LevenshteinDistance(s[0..len_s-1], t[0..len_t-1]) + cost)
+; }

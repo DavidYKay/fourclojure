@@ -278,13 +278,6 @@
       (->> (my-map inc (range)) (drop (dec 1000000)) (take 2)) => [1000000 1000001]
       )
 
-(fact "I can find the next accum based on current."
-      (next-accum [[1 3] [1 7]]) => [[2 3] [1 7]]
-      (next-accum [[2 3] [1 7]]) => [[3 3] [1 7]]
-
-      (next-accum [[6 3] [3 7]]) => [[7 3] [3 7]]
-      )
-
 (fact "I can find the LCM of two numbers. Prob100."
       (lcm 2 3) => 6
       (lcm 3 7) => 21
@@ -338,3 +331,20 @@
       ;(tree-to-table '{m {1 [a b c] 3 nil}}) =>
       ;'{[m 1] [a b c], [m 3] nil}
       ;)
+;
+
+
+(fact "I can calculate the levenshtein distance. Prob 101."
+      (levenshtein "Clojure" "Clojure")              => 0
+      (levenshtein "" "")                            => 0
+      (levenshtein [] [])                            => 0
+      (levenshtein "xyx" "xyyyx")                    => 2
+      (levenshtein "" "123456")                      => 6
+      (levenshtein "closure" "clojure")              => 1
+      (levenshtein "clojure" "closure")              => 1
+      (levenshtein "kitten" "sitting")               => 3
+      (levenshtein [1 2 3 4] [0 2 3 4 5])            => 2
+      (levenshtein '(:a :b :c :d) '(:a :d))          => 2
+      ;(levenshtein "ttttattttctg" "tcaaccctaccat")   => 10
+      ;(levenshtein "gaattctaatctc" "caaacaaaaaattt") => 9
+      )
