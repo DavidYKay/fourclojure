@@ -255,16 +255,18 @@
         accum)))
 
 (defn lcm [& args]
-  (defn recursive-lcm [accum]
+  (letfn [(recursive-lcm [accum]
     (let [products (map product accum)]
       (if (and (> (count products) 0)
                (= (count (set products)) 1))
         (first products)
           (recur (next-accum accum)))))
+          ]
   (let [prepped-accum (map (fn [x]
                              [1 x])
                            args)]
-    (recursive-lcm prepped-accum)))
+    (recursive-lcm prepped-accum))
+    ))
 
 (defn set-difference [a b]
   (clojure.set/union
