@@ -278,8 +278,16 @@
       (->> (my-map inc (range)) (drop (dec 1000000)) (take 2)) => [1000000 1000001]
       )
 
+(fact "I can find the next accum based on current."
+      (next-accum [[1 3] [1 7]]) => [[2 3] [1 7]]
+      (next-accum [[2 3] [1 7]]) => [[3 3] [1 7]]
+
+      (next-accum [[6 3] [3 7]]) => [[7 3] [3 7]]
+      )
+
 (fact "I can find the LCM of two numbers. Prob100."
       (lcm 2 3) => 6
+      (lcm 3 7) => 21
       (lcm 5 3 7) => 105
       (lcm 1/3 2/5) => 2
       (lcm 3/4 1/6) => 3/2

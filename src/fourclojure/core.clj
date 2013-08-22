@@ -242,22 +242,36 @@
   (/ (* a b)
      (my-gcd a b)))
 
-(defn lcm [& args]
-  (defn iterate-numbers [numbers]
-    ;(first (for [x [(range 1000)]
-    (first (for [x [2 3 4]
-                 :let [y (map #(/ x) numbers)]]
-             y))
-    )
+(defn product [pair]
+  (* (first pair) (last pair)))
 
-  (defn recursive-lcm [numbers factors]
-    (if (every? #(= 1) numbers)
-      (reduce * factors)
-      (let [new-numbers [ 1 1 1]
-            new-factors [ 1 2 3]
-            ]
-            (recur new-numbers new-factors))))
-  (recursive-lcm args []))
+(defn next-accum [accum]
+ (let [products (map product accum)
+       min-number (reduce min products)
+       ; min-index (.indexOf products min-number)
+       ]
+   (println "products was: " products)
+   (println "min for: " products " was: " min-number)
+   (map (fn [x]
+          (if (= (product x) min-number)
+            [(inc (first x)) (last x)]
+            x))
+        accum)))
+
+(defn lcm [& args]
+  (defn recursive-lcm [accum]
+    (let [products (map product accum)]
+      (if (and (> (count products) 0)
+               (= (count (set products)) 1))
+        (first products)
+        (do
+          (println "recurring with accum: " accum)
+          (recur (next-accum accum))))))
+  (let [prepped-accum (map (fn [x]
+                             [1 x])
+                           args)
+        ]
+    (recursive-lcm prepped-accum)))
 
 (defn set-difference [a b]
   (clojure.set/union
