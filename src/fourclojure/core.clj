@@ -238,35 +238,34 @@
     (cons (f (first s))
           (lazy-seq (my-map f (rest s))))))
 
-(defn lcm-pair [a b]
-  (/ (* a b)
-     (my-gcd a b)))
-
-(defn product [pair]
-  (* (first pair) (last pair)))
-
-(defn next-accum [accum]
- (let [products (map product accum)
-       min-number (reduce min products)]
-   (map (fn [x]
-          (if (= (product x) min-number)
-            [(inc (first x)) (last x)]
-            x))
-        accum)))
+;(defn lcm-pair [a b]
+  ;(/ (* a b)
+     ;(my-gcd a b)))
 
 (defn lcm [& args]
-  (letfn [(recursive-lcm [accum]
-    (let [products (map product accum)]
-      (if (and (> (count products) 0)
-               (= (count (set products)) 1))
-        (first products)
-          (recur (next-accum accum)))))
-          ]
-  (let [prepped-accum (map (fn [x]
+  (let [product (fn [pair]
+                  (* (first pair) (last pair)))
+
+        next-accum (fn [accum]
+                     (let [products (map product accum)
+                           min-number (reduce min products)]
+                       (map (fn [x]
+                              (if (= (product x) min-number)
+                                [(inc (first x)) (last x)]
+                                x))
+                            accum)))
+
+        recursive-lcm (fn [accum]
+                        (let [products (map product accum)]
+                          (if (and (> (count products) 0)
+                                   (= (count (set products)) 1))
+                            (first products)
+                            (recur (next-accum accum)))))
+
+        prepped-accum (map (fn [x]
                              [1 x])
                            args)]
-    (recursive-lcm prepped-accum))
-    ))
+    (recursive-lcm prepped-accum)))
 
 (defn set-difference [a b]
   (clojure.set/union
