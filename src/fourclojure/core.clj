@@ -290,22 +290,26 @@
 
   )
 
-(defn levenshtein [a b]
-  (if (or (nil? a)
-          (= "" a))
-    (count b)
-    (if (or (nil? b)
-            (= "" b))
-      (count a)
-      (if (= a b)
-        0
-        (let [last-char-cost (if (= (last (seq a))
-                                    (last (seq b)))
-                               0
-                               1)]
-          (reduce min [(inc (levenshtein (butlast a) b))
-                       (inc (levenshtein a (butlast b)))
-                       (+ last-char-cost (levenshtein (butlast a) (butlast b)))]))))))
+(defn levenshtein [x y]
+  (let [leven (memoize (fn [a b]
+    (if (or (nil? a)
+            (= "" a))
+      (count b)
+      (if (or (nil? b)
+              (= "" b))
+        (count a)
+        (if (= a b)
+          0
+          (let [last-char-cost (if (= (last (seq a))
+                                      (last (seq b)))
+                                 0
+                                 1)]
+            (reduce min [(inc (levenshtein (butlast a) b))
+                         (inc (levenshtein a (butlast b)))
+                         (+ last-char-cost (levenshtein (butlast a) (butlast b)))])))))))
+        ]
+
+        (leven x y)))
 
 ; int LevenshteinDistance(string s, string t) {
 ;   int len_s = length(s);
