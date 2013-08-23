@@ -1,4 +1,6 @@
-(ns fourclojure.core)
+(ns fourclojure.core
+  (:require [taoensso.timbre :as timbre])
+  )
 
 (defn foo
   "I don't do a whole lot."
@@ -290,41 +292,86 @@
 
   )
 
-(defn levenshtein [x y]
-  (let [leven (memoize (fn [a b]
-    (if (or (nil? a)
-            (= "" a))
-      (count b)
-      (if (or (nil? b)
-              (= "" b))
-        (count a)
-        (if (= a b)
-          0
-          (let [last-char-cost (if (= (last (seq a))
-                                      (last (seq b)))
-                                 0
-                                 1)]
-            (reduce min [(inc (levenshtein (butlast a) b))
-                         (inc (levenshtein a (butlast b)))
-                         (+ last-char-cost (levenshtein (butlast a) (butlast b)))])))))))
-        ]
+(defn naive-leven [a b]
+  (println "Iterating with A of: " a " and B of: " b)
+  (if (or (nil? a)
+          (= "" a))
+    (count b)
+    (if (or (nil? b)
+            (= "" b))
+      (count a)
+      (if (= a b)
+        0
+        (let [last-char-cost (if (= (last (seq a))
+                                    (last (seq b)))
+                               0
+                               1)]
+          (reduce min [(inc (naive-leven (butlast a) b))
+                       (inc (naive-leven a (butlast b)))
+                       (+ last-char-cost (naive-leven (butlast a) (butlast b)))]))))))
 
-        (leven x y)))
+(def memo-naive-leven (memoize naive-leven))
 
-; int LevenshteinDistance(string s, string t) {
-;   int len_s = length(s);
-;   int len_t = length(t);
+(defn initialize-matrix [m n]
+  (defn recur-row [rows i]
+    (if (= i -1)
+      rows
+      (let [prev-row (last rows)
+            new-row (conj
+                      (take (dec (count prev-row)) (repeatedly (fn [] 0)))
+
+                      (inc (first prev-row))
+                      )]
+      (recur (conj rows new-row) (dec i)))))
+
+  (let [first-row (take n (iterate inc 0))]
+    (recur-row [first-row] m)))
+
+(defn bottom-up-leven [a b]
+  nil)
+
+  ;(let [initial-matrix (initialize-matrix (count a) (count b))
+        ;]
+    ;)
+
+  ;(last (last result m) n))
+
+; int LevenshteinDistance(char s[1..m], char t[1..n]) {
 ;
-;   /* test for degenerate cases of empty strings */
-;   if (len_s == 0) return len_t;
-;   if (len_t == 0) return len_s;
+;   for j from 1 to n {
+;       for i from 1 to m {
+;           if s[i] = t[j] then  ;going on the assumption that string indexes are 1-based in your chosen language<!-- not: s[i-1] = t[j-1] -->
+;                                ;else you will have to use s[i-1] = t[j-1] Not doing this might throw an IndexOutOfBound error
+;             d[i, j] := d[i-1, j-1]       ; no operation required
+;           else
+;             d[i, j] := minimum
+;                     (
+;                       d[i-1, j] + 1,  ; a deletion
+;                       d[i, j-1] + 1,  ; an insertion
+;                       d[i-1, j-1] + 1 ; a substitution
+;                     )
+;         }
+;     }
 ;
-;   /* test if last characters of the strings match */
-;   if (s[len_s-1] == t[len_t-1]) cost = 0;
-;   else                          cost = 1;
-;
-;   /* return minimum of delete char from s, delete char from t, and delete char from both */
-;   return minimum(LevenshteinDistance(s[0..len_s-1], t) + 1,
-;                  LevenshteinDistance(s, t[0..len_t-1]) + 1,
-;                  LevenshteinDistance(s[0..len_s-1], t[0..len_t-1]) + cost)
+;   return d[m, n]
 ; }
+;
+(defn levenshtein [x y]
+         (time (naive-leven x y)))
+
+(defn primes [x]
+  (defn recur-primes [universe p]
+    (if (= (last universe) p)
+      universe
+      (let [new-universe (remove (fn [x]
+                                   (and
+                                     (not (= x p))
+                                     (= 0 (mod x p))))
+                                   universe)
+            new-p        (first (filter (fn [x]
+                                          (> x p))
+                                        new-universe))]
+        (recur new-universe new-p))))
+  (let [universe (take 1000 (iterate inc 2))
+        prime-list (recur-primes universe 2)]
+    (take x prime-list)))

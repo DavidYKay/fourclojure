@@ -333,18 +333,37 @@
       ;)
 ;
 
+(fact "I can initialize a matrix of size m x n"
+      (initialize-matrix 6 7) => [[0 1 2 3 4 5 6]
+                                  [1 0 0 0 0 0 0]
+                                  [2 0 0 0 0 0 0]
+                                  [3 0 0 0 0 0 0]
+                                  [4 0 0 0 0 0 0]
+                                  [5 0 0 0 0 0 0]
+                                  [6 0 0 0 0 0 0]
+                                  [7 0 0 0 0 0 0]]
+
+      )
 
 (fact "I can calculate the levenshtein distance. Prob 101."
-      (levenshtein "Clojure" "Clojure")              => 0
-      (levenshtein "" "")                            => 0
-      (levenshtein [] [])                            => 0
-      (levenshtein "xyx" "xyyyx")                    => 2
-      (levenshtein "" "123456")                      => 6
-      (levenshtein "closure" "clojure")              => 1
-      (levenshtein "clojure" "closure")              => 1
-      (levenshtein "kitten" "sitting")               => 3
-      (levenshtein [1 2 3 4] [0 2 3 4 5])            => 2
-      (levenshtein '(:a :b :c :d) '(:a :d))          => 2
+      ;(levenshtein "Clojure" "Clojure")              => 0
+      ;(levenshtein "" "")                            => 0
+      ;(levenshtein [] [])                            => 0
+      ;(levenshtein "xyx" "xyyyx")                    => 2
+      ;(levenshtein "" "123456")                      => 6
+      ;(levenshtein "closure" "clojure")              => 1
+      ;(levenshtein "clojure" "closure")              => 1
+      ;(levenshtein "kitten" "sitting")               => 3
+      ;(levenshtein [1 2 3 4] [0 2 3 4 5])            => 2
+      ;(levenshtein '(:a :b :c :d) '(:a :d))          => 2
       ;(levenshtein "ttttattttctg" "tcaaccctaccat")   => 10
       ;(levenshtein "gaattctaatctc" "caaacaaaaaattt") => 9
+      )
+
+
+
+(fact "I find the first x primes. Prob67."
+      (primes 2) => [2 3]
+      (primes 5) => [2 3 5 7 11]
+      (last (primes 100)) => 541
       )

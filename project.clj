@@ -4,11 +4,12 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.4.0"]
+                 [com.taoensso/timbre "2.6.1"]
                  ]
   :plugins [
             [lein-midje "3.0-alpha4"]
             ]
-  
+
   :profiles {:dev {:dependencies [
                                   [midje "1.5-alpha10"]
                                   [com.stuartsierra/lazytest "1.2.3"]
