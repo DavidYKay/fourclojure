@@ -360,18 +360,18 @@
          (time (naive-leven x y)))
 
 (defn primes [x]
-  (defn recur-primes [universe p]
-    (if (= (last universe) p)
-      universe
-      (let [new-universe (remove (fn [x]
-                                   (and
-                                     (not (= x p))
-                                     (= 0 (mod x p))))
-                                   universe)
-            new-p        (first (filter (fn [x]
-                                          (> x p))
-                                        new-universe))]
-        (recur new-universe new-p))))
-  (let [universe (take 1000 (iterate inc 2))
+  (let [recur-primes (fn [universe p]
+          (if (= (last universe) p)
+            universe
+            (let [new-universe (remove (fn [x]
+                                         (and
+                                           (not (= x p))
+                                           (= 0 (mod x p))))
+                                       universe)
+                  new-p        (first (filter (fn [x]
+                                                (> x p))
+                                              new-universe))]
+              (recur new-universe new-p))))
+        universe (take 1000 (iterate inc 2))
         prime-list (recur-primes universe 2)]
     (take x prime-list)))
