@@ -419,8 +419,24 @@
         (second board)
         (last board))))
   (defn check-diagonal [board]
+    (reduce
+      (fn [a b]
+        (or a b))
+      (map
+        (fn [diagonal]
+          (if (and (= 1 (count (set diagonal)))
+                   (not (= :e (first diagonal))))
+            (first diagonal)
+            nil))
+        [
+         [(ffirst board)
+          (second (second board))
+          (last (last board))]
 
-    )
+         [(last (first board))
+          (second (second board))
+          (first (last board))]
+         ])))
   (or
     (check-horizontal board)
     (check-vertical board)
