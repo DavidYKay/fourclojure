@@ -372,3 +372,35 @@
       (my-distinct '([2 4] [1 2] [1 3] [1 3])) => '([2 4] [1 2] [1 3])
       (my-distinct (range 50)) => (range 50)
       )
+
+(fact "I can split a seq by data type. Prob50."
+      ;(set (split-by-type [1 :a 2 :b 3 :c])) => #{[1 2 3] [:a :b :c]}
+      ;(set (split-by-type [:a "foo" "bar" :b])) => #{[:a :b] ["foo" "bar"]}
+      ;(set (split-by-type [[1 2] :a [3 4] 5 6 :b])) => #{[[1 2] [3 4]] [:a :b] [5 6]}
+      )
+
+
+
+(fact "I can analyze a Tic-Tac-Toe board. Prob73."
+      (tic-tac-toe [[:e :e :e]
+                    [:e :e :e]
+                    [:e :e :e]]) => nil
+      (tic-tac-toe [[:x :e :o]
+                    [:x :e :e]
+                    [:x :e :o]]) => :x ; vertical
+      (tic-tac-toe [[:e :x :e]
+                    [:o :o :o]
+                    [:x :e :x]]) => :o
+      (tic-tac-toe [[:x :e :o]
+                    [:x :x :e]
+                    [:o :x :o]]) => nil
+      (tic-tac-toe [[:x :e :e]
+                    [:o :x :e]
+                    [:o :e :x]]) => :x ; diagonal right
+      (tic-tac-toe [[:x :e :o]
+                    [:x :o :e]
+                    [:o :e :x]]) => :o ; diagonal left
+      (tic-tac-toe [[:x :o :x]
+                    [:x :o :x]
+                    [:o :x :o]]) => nil
+      )

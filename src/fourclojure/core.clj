@@ -388,3 +388,40 @@
                              (recur symbols new-remaining new-accum))))]
 
     (recur-distinct (set s) s [])))
+
+(defn split-by-type [s]
+  nil
+  )
+
+(defn tic-tac-toe [board]
+  (defn check-horizontal [board]
+    (reduce
+      (fn [a b]
+        (or a b))
+      (map
+        (fn [row]
+          (if (and (= 1 (count (set row)))
+                   (not (= :e (first row))))
+            (first row)
+            nil))
+        board)))
+  (defn check-vertical [board]
+    (reduce
+      (fn [a b]
+        (or a b))
+      (map
+        (fn [a b c]
+          (if (and (not (= :e a))
+                   (= a b c))
+            a
+            nil))
+        (first board)
+        (second board)
+        (last board))))
+  (defn check-diagonal [board]
+
+    )
+  (or
+    (check-horizontal board)
+    (check-vertical board)
+    (check-diagonal board)))
