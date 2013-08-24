@@ -394,45 +394,36 @@
   )
 
 (defn tic-tac-toe [board]
+  (defn clean-output [s]
+    (reduce (fn [a b]
+              (or a b)) s))
   (defn eval-row [row]
     (if (and (= 1 (count (set row)))
              (not (= :e (first row))))
       (first row)
       nil))
   (defn check-horizontal [board]
-    (reduce
-      (fn [a b]
-        (or a b))
       (map
         eval-row
-        board)))
+        board))
   (defn check-vertical [board]
-    (reduce
-      (fn [a b]
-        (or a b))
       (map
         (fn [a b c]
           (eval-row (list a b c)))
         (first board)
         (second board)
-        (last board)
-        )))
+        (last board)))
   (defn check-diagonal [board]
-    (reduce
-      (fn [a b]
-        (or a b))
       (map
         eval-row
-        [
-         [(ffirst board)
+        [[(ffirst board)
           (second (second board))
           (last (last board))]
-
          [(last (first board))
           (second (second board))
-          (first (last board))]
-         ])))
+          (first (last board))]]))
   (or
-    (check-horizontal board)
-    (check-vertical board)
-    (check-diagonal board)))
+    (clean-output (flatten (list
+                             (check-horizontal board)
+                             (check-vertical board)
+                             (check-diagonal board))))))
