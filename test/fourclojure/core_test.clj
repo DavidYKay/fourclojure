@@ -360,10 +360,15 @@
       ;(levenshtein "gaattctaatctc" "caaacaaaaaattt") => 9
       )
 
-
-
 (fact "I find the first x primes. Prob67."
       (primes 2) => [2 3]
       (primes 5) => [2 3 5 7 11]
       (last (primes 100)) => 541
+      )
+
+(fact "I find distinct elements. Prob56."
+      (my-distinct [1 2 1 3 1 2 4]) => [1 2 3 4]
+      (my-distinct [:a :a :b :b :c :c]) => [:a :b :c]
+      (my-distinct '([2 4] [1 2] [1 3] [1 3])) => '([2 4] [1 2] [1 3])
+      (my-distinct (range 50)) => (range 50)
       )

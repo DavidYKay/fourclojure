@@ -375,3 +375,16 @@
         universe (take 1000 (iterate inc 2))
         prime-list (recur-primes universe 2)]
     (take x prime-list)))
+
+(defn my-distinct [s]
+  (let [recur-distinct (fn [symbols remaining accum]
+                         (if (= (count symbols)
+                                (count accum))
+                           accum
+                           (let [new-accum (conj accum (first remaining))
+                                 new-remaining (remove (fn [x]
+                                                         (contains? (set new-accum) x))
+                                                       remaining)]
+                             (recur symbols new-remaining new-accum))))]
+
+    (recur-distinct (set s) s [])))
