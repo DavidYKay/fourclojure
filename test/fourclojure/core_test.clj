@@ -379,8 +379,6 @@
       ;(set (split-by-type [[1 2] :a [3 4] 5 6 :b])) => #{[[1 2] [3 4]] [:a :b] [5 6]}
       )
 
-
-
 (fact "I can analyze a Tic-Tac-Toe board. Prob73."
       (tic-tac-toe [[:e :e :e]
                     [:e :e :e]

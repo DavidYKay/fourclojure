@@ -394,36 +394,36 @@
   )
 
 (defn tic-tac-toe [board]
-  (defn clean-output [s]
-    (reduce (fn [a b]
-              (or a b)) s))
-  (defn eval-row [row]
-    (if (and (= 1 (count (set row)))
-             (not (= :e (first row))))
-      (first row)
-      nil))
-  (defn check-horizontal [board]
-      (map
-        eval-row
-        board))
-  (defn check-vertical [board]
-      (map
-        (fn [a b c]
-          (eval-row (list a b c)))
-        (first board)
-        (second board)
-        (last board)))
-  (defn check-diagonal [board]
-      (map
-        eval-row
-        [[(ffirst board)
-          (second (second board))
-          (last (last board))]
-         [(last (first board))
-          (second (second board))
-          (first (last board))]]))
-  (or
-    (clean-output (flatten (list
-                             (check-horizontal board)
-                             (check-vertical board)
-                             (check-diagonal board))))))
+  (let [clean-output (fn clean-output [s]
+                       (reduce (fn [a b]
+                                 (or a b)) s))
+        eval-row (fn eval-row [row]
+                   (if (and (= 1 (count (set row)))
+                            (not (= :e (first row))))
+                     (first row)
+                     nil))
+        check-horizontal (fn check-horizontal [board]
+                           (map
+                             eval-row
+                             board))
+        check-vertical (fn check-vertical [board]
+                         (map
+                           (fn [a b c]
+                             (eval-row (list a b c)))
+                           (first board)
+                           (second board)
+                           (last board)))
+        check-diagonal (fn check-diagonal [board]
+                         (map
+                           eval-row
+                           [[(ffirst board)
+                             (second (second board))
+                             (last (last board))]
+                            [(last (first board))
+                             (second (second board))
+                             (first (last board))]]))]
+        (or
+          (clean-output (flatten (list
+                                   (check-horizontal board)
+                                   (check-vertical board)
+                                   (check-diagonal board)))))))
