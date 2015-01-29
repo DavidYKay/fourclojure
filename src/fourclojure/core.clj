@@ -452,3 +452,30 @@
                     [(last s)]
                     (butlast s)))
    (= n 0) s))
+
+; (defn compose-recursive [accum fns]
+;   (if (= 0 (count fns))
+;     accum
+;     (let [new-fn (fn [& as]
+;                    (apply ((last fns) accum) as) )
+;           ]
+;       (compose-recursive
+;         new-fn
+;         (butlast fns)))))
+
+;(defn compose [& compose-args]
+;  (compose-recursive identity compose-args))
+
+(defn compose
+  ([x] x)
+  ([x y] (fn [a & args]
+           (let [
+                 all-args (conj args a)
+                 internal (apply y all-args)
+                 external (x internal)
+                 ]
+
+             external
+             )))
+  ([x y & more]
+   (reduce compose (compose x y) more)))

@@ -447,3 +447,26 @@
       (rotate-sequence -4 '(:a :b :c)) => '(:c :a :b)
       )
 
+
+(fact "I can create a function that is a composition of other functions. Problem 58."
+ ; "Special Restrictions: comp"
+  ((compose rest reverse)
+     [1 2 3 4]) => [3 2 1]
+
+  ((compose
+     (partial + 3)
+     second)
+     [1 2 3 4]) => 5
+  ((compose zero?
+            #(mod % 8)
+            +)
+     3 5 7 9) => true
+  ((compose #(.toUpperCase %)
+            #(apply str %)
+            take)
+     5 "hello world") => "HELLO"
+
+
+)
+
+
