@@ -453,22 +453,34 @@
                     (butlast s)))
    (= n 0) s))
 
-; (defn compose-recursive [accum fns]
-;   (if (= 0 (count fns))
-;     accum
-;     (let [new-fn (fn [& as]
-;                    (apply ((last fns) accum) as) )
-;           ]
-;       (compose-recursive
-;         new-fn
-;         (butlast fns)))))
-
-;(defn compose [& compose-args]
-;  (compose-recursive identity compose-args))
-
 (defn compose
   ([x] x)
   ([x y] (fn [& args]
            (x (apply y args))))
   ([x y & more]
    (reduce compose (compose x y) more)))
+
+(defn reverse-interleave [input-seq num-buckets]
+
+  (let [pairs (map-indexed (fn [idx itm]
+                             (let [bucket-number (mod idx num-buckets)]
+                               [bucket-number itm]))
+                           input-seq)
+
+        groups (group-by first pairs)
+
+        elements (map (fn [s]
+                    (let [elements (last s)]
+                      (map last elements)
+                      ))
+                    groups)
+        ]
+    elements
+    )
+  )
+
+(defn split-by-type [x]
+  x
+  ;(set [x])
+  )
+
