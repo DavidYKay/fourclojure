@@ -427,3 +427,16 @@
                                    (check-horizontal board)
                                    (check-vertical board)
                                    (check-diagonal board)))))))
+
+(defn trees-to-tables [m]
+  (let [seqs (for [[k v] m]
+               (if (map? v)
+                 (for [[a b] v]
+                   [[k a] b])
+                 [k v]))
+        k-vs (reduce concat seqs)
+        pairs (map #(hash-map (first %) (last %)) k-vs)
+        new-m (into {} pairs)
+        ]
+    new-m
+    ))
