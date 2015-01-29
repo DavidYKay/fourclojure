@@ -433,3 +433,17 @@
       (trees-to-tables '{m {1 [a b c] 3 nil}}) => '{[m 1] [a b c], [m 3] nil}
 
       )
+
+(fact "I can rotate sequences in both directions. Problem 44"
+
+      (rotate-sequence 2 [1 2 3 4 5]) => '(3 4 5 1 2)
+
+      (rotate-sequence 6 [1 2 3 4 5]) => '(2 3 4 5 1)
+
+      (rotate-sequence 1 '(:a :b :c)) => '(:b :c :a)
+
+      (rotate-sequence -2 [1 2 3 4 5]) => '(4 5 1 2 3)
+
+      (rotate-sequence -4 '(:a :b :c)) => '(:c :a :b)
+      )
+

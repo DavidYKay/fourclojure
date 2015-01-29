@@ -438,5 +438,17 @@
         pairs (map #(hash-map (first %) (last %)) k-vs)
         new-m (into {} pairs)
         ]
-    new-m
-    ))
+    new-m))
+
+(defn rotate-sequence [n s]
+ (cond
+   (> n 0) (recur (dec n)
+                  (concat
+                    (rest s)
+                    [(first s)]))
+
+   (< n 0) (recur (inc n)
+                  (concat
+                    [(last s)]
+                    (butlast s)))
+   (= n 0) s))
