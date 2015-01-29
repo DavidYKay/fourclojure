@@ -501,3 +501,7 @@
       accum
       (recur (conj accum (take bucket-size s))
              (drop bucket-size s)))))
+
+(defn to-camel [s]
+  (reduce #(str %1 (clojure.string/capitalize %2))
+          (clojure.string/split s #"-")))

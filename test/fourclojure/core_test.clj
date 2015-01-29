@@ -509,3 +509,9 @@
       (recursive-partition 3 (range 8)) => '((0 1 2) (3 4 5))
 
       )
+
+(fact "I can convert words to camelCase - Problem 102"
+      (to-camel "something") => "something"
+      (to-camel "multi-word-key") => "multiWordKey"
+      (to-camel "leaveMeAlone") => "leaveMeAlone"
+      )
