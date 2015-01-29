@@ -1,6 +1,5 @@
 (ns fourclojure.core
-  (:require [taoensso.timbre :as timbre])
-  )
+  (:require [taoensso.timbre :as timbre]))
 
 (defn foo
   "I don't do a whole lot."
@@ -480,3 +479,19 @@
     (map (fn [f]
            (apply f args))
          fns)))
+
+(defn my-partition [bucket-size input-seq]
+  (let [pairs (map-indexed (fn [idx itm]
+                             (let [bucket-num (int (/ idx bucket-size))]
+                               (sorted-map bucket-num itm)))
+                           input-seq)
+        map-seqs    (reduce
+                      #(merge-with (fn [a b]
+                                     (flatten [a b]))
+                                   %1 %2)
+                      pairs)]
+    (map last (filter (fn [[k v]]
+              (>= (count v) bucket-size))
+           (seq map-seqs)))
+    ))
+

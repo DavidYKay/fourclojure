@@ -473,7 +473,6 @@
       (reverse-interleave (range 9) 3) => '((0 3 6) (1 4 7) (2 5 8))
       (reverse-interleave (range 10) 5) => '((0 5) (1 6) (2 7) (3 8) (4 9))
 
-
       )
 
 (fact "I can count occurrences. Problem 55."
@@ -491,5 +490,13 @@
       ((juxtapose + max min) 2 3 5 1 6 4) => [21 6 1]
       ((juxtapose #(.toUpperCase %) count) "hello") => ["HELLO" 5]
       ((juxtapose :a :c :b) {:a 2, :b 4, :c 6, :d 8 :e 10}) => [2 6 4]
-
 )
+
+(fact "I can reimplement partition Problem 55."
+
+      ; Write a function which returns a sequence of lists of x items each. Lists of less than x items should not be returned.
+
+      (my-partition 3 (range 9)) => '((0 1 2) (3 4 5) (6 7 8))
+      (my-partition 2 (range 8)) => '((0 1) (2 3) (4 5) (6 7))
+      (my-partition 3 (range 8)) => '((0 1 2) (3 4 5))
+      )
