@@ -515,3 +515,8 @@
       (to-camel "multi-word-key") => "multiWordKey"
       (to-camel "leaveMeAlone") => "leaveMeAlone"
       )
+
+(fact "I can find anagrams - Problem 77"
+      (find-anagrams ["meat" "mat" "team" "mate" "eat"]) => #{#{"meat" "team" "mate"}}
+      (find-anagrams ["veer" "lake" "item" "kale" "mite" "ever"]) => #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}}
+      )

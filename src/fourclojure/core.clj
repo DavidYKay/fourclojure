@@ -505,3 +505,15 @@
 (defn to-camel [s]
   (reduce #(str %1 (clojure.string/capitalize %2))
           (clojure.string/split s #"-")))
+
+(defn find-anagrams [words]
+  (let [pairs (map (fn [w]
+                     {(set w) [w]})
+                   words)
+        anagram-map (reduce
+                      #(merge-with concat %2 %1)
+                      pairs)
+        ]
+    (set (filter #(> (count %) 1)
+            (map #(set (last %)) (seq anagram-map))))
+    ))
