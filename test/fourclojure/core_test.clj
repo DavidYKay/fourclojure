@@ -484,3 +484,12 @@
 
 
 )
+
+(fact "I can reimplement juxt Problem 55."
+      ;Special Restrictions: juxt
+
+      ((juxtapose + max min) 2 3 5 1 6 4) => [21 6 1]
+      ((juxtapose #(.toUpperCase %) count) "hello") => ["HELLO" 5]
+      ((juxtapose :a :c :b) {:a 2, :b 4, :c 6, :d 8 :e 10}) => [2 6 4]
+
+)

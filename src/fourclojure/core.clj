@@ -474,3 +474,9 @@
 (defn count-occurrences [s]
   (reduce #(merge-with + %1 %2)
               (map (fn [a] {a 1}) s)))
+
+(defn juxtapose [& fns]
+  (fn [& args]
+    (map (fn [f]
+           (apply f args))
+         fns)))
