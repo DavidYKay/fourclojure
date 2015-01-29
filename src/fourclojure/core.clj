@@ -492,6 +492,12 @@
                       pairs)]
     (map last (filter (fn [[k v]]
               (>= (count v) bucket-size))
-           (seq map-seqs)))
-    ))
+           (seq map-seqs)))))
 
+(defn recursive-partition [bucket-size input-seq]
+  (loop [accum []
+         s input-seq]
+    (if (< (count s) bucket-size)
+      accum
+      (recur (conj accum (take bucket-size s))
+             (drop bucket-size s)))))
