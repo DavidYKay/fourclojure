@@ -461,26 +461,16 @@
    (reduce compose (compose x y) more)))
 
 (defn reverse-interleave [input-seq num-buckets]
-
   (let [pairs (map-indexed (fn [idx itm]
                              (let [bucket-number (mod idx num-buckets)]
                                [bucket-number itm]))
                            input-seq)
+        groups (group-by first pairs)]
+    (map (fn [s]
+           (let [elements (last s)]
+             (map last elements)))
+         groups)))
 
-        groups (group-by first pairs)
-
-        elements (map (fn [s]
-                    (let [elements (last s)]
-                      (map last elements)
-                      ))
-                    groups)
-        ]
-    elements
-    )
-  )
-
-(defn split-by-type [x]
-  x
-  ;(set [x])
-  )
-
+(defn count-occurrences [s]
+  (reduce #(merge-with + %1 %2)
+              (map (fn [a] {a 1}) s)))

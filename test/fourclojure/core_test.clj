@@ -476,15 +476,11 @@
 
       )
 
-(fact "I can split a seq by type. Problem 50."
-  ;(set (split-by-type [1 2 3])) => #{[1 2 3]}
+(fact "I can count occurrences. Problem 55."
 
-  ;(set (split-by-type [1 :a 2 :b 3 :c])) => #{[1 2 3] [:a :b :c]}
-      ;(set (split-by-type [:a "foo"  "bar" :b])) => '#{[:a :b] ["foo" "bar"]}
-      ; "" => #{ ["foo" "bar"]}
+  (count-occurrences [1 1 2 3 2 1 1]) => {1 4, 2 2, 3 1}
+  (count-occurrences [:b :a :b :a :b]) => {:a 2, :b 3}
+  (count-occurrences '([1 2] [1 3] [1 3])) => {[1 2] 1, [1 3] 2}
 
-  ;(set (split-by-type [[1 2] :a [3 4] 5 6 :b])) => #{[[1 2] [3 4]]
-  ;                                                   [:a :b]
-  ;                                                   [5 6]}
 
 )
