@@ -520,3 +520,13 @@
       (find-anagrams ["meat" "mat" "team" "mate" "eat"]) => #{#{"meat" "team" "mate"}}
       (find-anagrams ["veer" "lake" "item" "kale" "mite" "ever"]) => #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}}
       )
+
+
+(fact "I can find power sets - Problem 77"
+
+      (power-set #{}) => #{#{}}
+      (power-set #{1 :a}) => #{#{1 :a} #{:a} #{} #{1}}
+      (power-set #{1 2 3}) => #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}}
+      (count (power-set (into #{} (range 10)))) => 1024
+
+      )

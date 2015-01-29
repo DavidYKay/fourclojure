@@ -512,8 +512,28 @@
                    words)
         anagram-map (reduce
                       #(merge-with concat %2 %1)
-                      pairs)
-        ]
+                      pairs)]
     (set (filter #(> (count %) 1)
             (map #(set (last %)) (seq anagram-map))))
     ))
+
+(defn power-set [universe]
+  (letfn [(recur-power-set [all-sets-found current-set potentials]
+            (if (= (count potentials) 0)
+              all-sets-found
+              (reduce concat
+                      all-sets-found
+                      (map (fn [x]
+                             (let [
+                                   ;new-sets-found (conj all-sets-found current-set)
+                                   new-current-set (conj current-set x)
+                                   new-sets-found (conj (conj all-sets-found current-set) new-current-set)
+                                   _ (println "current set: " new-current-set)
+                                   ]
+                               (recur-power-set
+                                 new-sets-found
+                                 new-current-set
+                                 (disj potentials x)))) potentials))))]
+    (set (recur-power-set #{#{}} #{} universe))
+    )
+  )
