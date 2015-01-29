@@ -468,14 +468,7 @@
 
 (defn compose
   ([x] x)
-  ([x y] (fn [a & args]
-           (let [
-                 all-args (conj args a)
-                 internal (apply y all-args)
-                 external (x internal)
-                 ]
-
-             external
-             )))
+  ([x y] (fn [& args]
+           (x (apply y args))))
   ([x y & more]
    (reduce compose (compose x y) more)))
