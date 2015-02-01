@@ -528,7 +528,9 @@
       (power-set #{}) => #{#{}}
       (power-set #{1 :a}) => #{#{1 :a} #{:a} #{} #{1}}
       (power-set #{1 2 3}) => #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}}
-      (count (power-set (into #{} (range 10)))) => 1024
+      ;(count (power-set (into #{} (range 10)))) => 1024
+      (count (power-set (into #{} (range 5)))) => 32
+      ; (count (power-set (into #{} (range 8)))) => 256
 
       )
 

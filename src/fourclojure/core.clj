@@ -521,24 +521,37 @@
             (map #(set (last %)) (seq anagram-map))))
     ))
 
-(defn power-set [universe]
+(defn slow-power-set [universe]
   (letfn [(recur-power-set [all-sets-found current-set potentials]
             (if (= (count potentials) 0)
               all-sets-found
-              (reduce concat
+              (reduce clojure.set/union
                       all-sets-found
-                      (map (fn [x]
-                             (let [
-                                   ;new-sets-found (conj all-sets-found current-set)
-                                   new-current-set (conj current-set x)
+                      (set (map (fn [x]
+                             (let [new-current-set (conj current-set x)
                                    new-sets-found (conj (conj all-sets-found current-set) new-current-set)
                                    _ (println "current set: " new-current-set)
                                    ]
                                (recur-power-set
                                  new-sets-found
                                  new-current-set
-                                 (disj potentials x)))) potentials))))]
-    (set (recur-power-set #{#{}} #{} universe))
+                                 (disj potentials x)))) potentials)))))]
+    (recur-power-set #{#{}} #{} universe)
+    )
+  )
+
+
+(defn power-set [universe]
+  (letfn [(recur-power-set [all-sets-found current-set potentials]
+            (if (= (count potentials) 0)
+              all-sets-found
+
+Find all sets given the current partial set
+Traverse the digits once
+Now treat the found sets as partials
+And recurse
+              ))]
+    (recur-power-set #{#{}} #{} universe)
     )
   )
 (defn longest-increasing-subseq [s]
