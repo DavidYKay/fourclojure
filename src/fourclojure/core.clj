@@ -507,12 +507,13 @@
              (drop bucket-size s)))))
 
 (defn longest-increasing-subseq [s]
-  (trace-forms
-    (loop [current []
-           longest []
-           input s]
-      (if (empty? input)
-        longest
+  (loop [current []
+         longest []
+         input s]
+    (if (empty? input)
+      (if (< (count longest) 2)
+             []
+             longest)
         (let [new-current (if (or (empty? current)
                                   (> (first input) (last current)))
                             (conj current (first input))
@@ -522,5 +523,4 @@
                             longest)]
           (recur new-current
                  new-longest
-                 (rest input))))
-      )))
+                 (rest input))))))
