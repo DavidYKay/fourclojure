@@ -1,5 +1,9 @@
 (ns fourclojure.core
-  (:require [taoensso.timbre :as timbre]))
+  (:require
+    [taoensso.timbre :as timbre]
+    [clojure.tools.trace :refer :all]
+    )
+  )
 
 (defn foo
   "I don't do a whole lot."
@@ -501,3 +505,22 @@
       accum
       (recur (conj accum (take bucket-size s))
              (drop bucket-size s)))))
+
+(defn longest-increasing-subseq [s]
+  (trace-forms
+    (loop [current []
+           longest []
+           input s]
+      (if (empty? input)
+        longest
+        (let [new-current (if (or (empty? current)
+                                  (> (first input) (last current)))
+                            (conj current (first input))
+                            [(first input)])
+              new-longest (if (> (count new-current) (count longest))
+                            new-current
+                            longest)]
+          (recur new-current
+                 new-longest
+                 (rest input))))
+      )))
