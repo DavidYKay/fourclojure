@@ -1,5 +1,6 @@
 (ns fourclojure.core-test
   (:use midje.sweet
+        clojure.tools.trace
         fourclojure.core))
 
 (fact "I can compress a sequence"
@@ -530,3 +531,12 @@
       (count (power-set (into #{} (range 10)))) => 1024
 
       )
+
+
+(fact "I can find the longest increasing subseq - Problem 55."
+
+   (longest-increasing-subseq [1 0 1 2 3 0 4 5]) => [0 1 2 3]
+   (longest-increasing-subseq [5 6 1 3 2 7]) => [5 6]
+   (longest-increasing-subseq [2 3 3 4 5])  =>[3 4 5]
+   (longest-increasing-subseq [7 6 5 4]) => []
+)

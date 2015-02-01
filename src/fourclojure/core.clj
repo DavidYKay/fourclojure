@@ -1,5 +1,9 @@
 (ns fourclojure.core
-  (:require [taoensso.timbre :as timbre]))
+  (:require
+    [taoensso.timbre :as timbre]
+    [clojure.tools.trace :refer :all]
+    )
+  )
 
 (defn foo
   "I don't do a whole lot."
@@ -537,3 +541,21 @@
     (set (recur-power-set #{#{}} #{} universe))
     )
   )
+(defn longest-increasing-subseq [s]
+  (loop [current []
+         longest []
+         input s]
+    (if (empty? input)
+      (if (< (count longest) 2)
+             []
+             longest)
+        (let [new-current (if (or (empty? current)
+                                  (> (first input) (last current)))
+                            (conj current (first input))
+                            [(first input)])
+              new-longest (if (> (count new-current) (count longest))
+                            new-current
+                            longest)]
+          (recur new-current
+                 new-longest
+                 (rest input))))))
